@@ -6,9 +6,12 @@ public class PlayerMovement : KinematicBody2D
    	[Export] public int speed = 200;
 
 	public Vector2 velocity = new Vector2();
+	
 
 	public void GetInput()
-	{
+	{	
+		LookAt(GetGlobalMousePosition());
+
 		velocity = new Vector2();
 
 		if (Input.IsActionPressed("player_right"))
