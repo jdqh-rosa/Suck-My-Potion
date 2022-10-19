@@ -14,6 +14,10 @@ config/name="Suck- My- Potion"
 run/main_scene="res://Node2D.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+SignalManager="*res://SignalManager.cs"
+
 [gui]
 
 common/drop_mouse_on_gui_input_disabled=true
