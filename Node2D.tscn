@@ -6,10 +6,13 @@
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 1 )
-player = ExtResource( 3 )
-enemy = ExtResource( 2 )
-
-[node name="Enemy" parent="." instance=ExtResource( 2 )]
+enemyPrefab = ExtResource( 2 )
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
-visible = false
+speed = 200
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
