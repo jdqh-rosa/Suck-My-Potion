@@ -1,11 +1,14 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://PlayerMovement.cs" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
 [ext_resource path="res://Sword.cs" type="Script" id=3]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 32, 32 )
+[sub_resource type="CircleShape2D" id=3]
+radius = 24.3311
+
+[sub_resource type="CircleShape2D" id=4]
+radius = 32.249
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 28, 12 )
@@ -15,11 +18,16 @@ position = Vector2( 232, 12 )
 script = ExtResource( 1 )
 speed = 500
 
-[node name="PlayerCollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
-
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 3 )
+
+[node name="PlayerBody" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerBody"]
+shape = SubResource( 4 )
 
 [node name="Sword" type="KinematicBody2D" parent="."]
 visible = false
@@ -39,5 +47,6 @@ texture = ExtResource( 2 )
 [node name="AttackTimer" type="Timer" parent="Sword"]
 wait_time = 0.1
 
+[connection signal="body_entered" from="PlayerBody" to="." method="_on_PlayerBody_body_entered"]
 [connection signal="timeout" from="Sword/CooldownTimer" to="Sword" method="_on_CooldownTimer_timeout"]
 [connection signal="timeout" from="Sword/AttackTimer" to="Sword" method="_on_AttackTimer_timeout"]
