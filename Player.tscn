@@ -11,7 +11,7 @@ radius = 30.0
 radius = 32.249
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 28, 12 )
+extents = Vector2( 30, 44 )
 
 [node name="Player" type="KinematicBody2D"]
 position = Vector2( 232, 12 )
@@ -30,17 +30,20 @@ shape = SubResource( 5 )
 shape = SubResource( 4 )
 
 [node name="Sword" type="KinematicBody2D" parent="."]
-visible = false
 script = ExtResource( 3 )
 
-[node name="SwordCollisionShape2D" type="CollisionShape2D" parent="Sword"]
-position = Vector2( 64, -1 )
-shape = SubResource( 2 )
+[node name="SwordBody" type="Area2D" parent="Sword"]
 
-[node name="Sprite" type="Sprite" parent="Sword"]
-position = Vector2( 64.5, -0.5 )
-scale = Vector2( 0.859375, 0.359375 )
+[node name="Sprite" type="Sprite" parent="Sword/SwordBody"]
+position = Vector2( 66.1237, -0.106516 )
+rotation = 1.5708
+scale = Vector2( 1.36318, 0.926976 )
 texture = ExtResource( 2 )
+
+[node name="SwordCollisionShape2D" type="CollisionShape2D" parent="Sword/SwordBody"]
+position = Vector2( 66, 0 )
+shape = SubResource( 2 )
+disabled = true
 
 [node name="CooldownTimer" type="Timer" parent="Sword"]
 
@@ -48,5 +51,6 @@ texture = ExtResource( 2 )
 wait_time = 0.1
 
 [connection signal="body_entered" from="PlayerBody" to="." method="_on_PlayerBody_body_entered"]
+[connection signal="body_entered" from="Sword/SwordBody" to="Sword" method="_on_SwordBody_body_entered"]
 [connection signal="timeout" from="Sword/CooldownTimer" to="Sword" method="_on_CooldownTimer_timeout"]
 [connection signal="timeout" from="Sword/AttackTimer" to="Sword" method="_on_AttackTimer_timeout"]

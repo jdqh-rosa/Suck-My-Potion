@@ -22,7 +22,7 @@ public class PlayerMovement : KinematicBody2D
 	public override void _Process(float delta)
   	{
 		if(health<=0){
-			this.Visible = false;
+			this.QueueFree();
 		}
   	}
 	public void GetInput()
@@ -60,8 +60,7 @@ public class PlayerMovement : KinematicBody2D
 	private void _on_PlayerBody_body_entered(KinematicBody2D body)
 	{
 		if(body.Name == "Enemy"){
-			GD.Print("Collision with Enemy");
-			//body.EmitSignal("on_player_hit");
+			
 		}
 	}
 
