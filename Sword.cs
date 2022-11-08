@@ -74,8 +74,8 @@ public class Sword : KinematicBody2D
 
 	private void _on_SwordBody_body_entered(Area2D body)
 	{
-		if(body.Name == "Enemy"){
-			GD.Print("Sword hits Enemy");
+		if(body.Name.Contains("Enemy")){
+			GD.Print("Sword attacks" + body.Name);
 			signalManager.Connect("enemy_hit", body, "_on_take_damage");
 			signalManager.EmitSignal("enemy_hit", damage);
 			//parent._on_take_damage(damage);
